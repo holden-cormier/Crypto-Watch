@@ -1,4 +1,7 @@
 package com.example.cryptowatch;
 
-public class CryptoWatchDetailActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class CryptoWatchDetailActivity extends AppCompatActivity {
+
 }
