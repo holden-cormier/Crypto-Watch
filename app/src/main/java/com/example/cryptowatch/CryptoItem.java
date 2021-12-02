@@ -14,7 +14,6 @@ public class CryptoItem {
 
 
     public CryptoItem(String name, float price, String symbol, String imageURL) {
-
         this.name = name;
         this.price = price;
         this.symbol = symbol;

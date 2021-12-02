@@ -7,53 +7,61 @@
     android:id="@+id/cryptoItemCardView"
     app:cardCornerRadius="10dp"
     android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
     android:layout_marginLeft="12dp"
     android:layout_marginRight="12dp"
     android:background="#888888"
     >
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:orientation="horizontal">
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/imageCardView"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
             android:elevation="12dp"
-            android:id="@+id/view2"
             app:cardCornerRadius="40dp"
-            android:layout_centerHorizontal="true">
+            android:layout_marginRight="8dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            >
+
             <ImageView
-                android:layout_height="80dp"
-                android:layout_width="match_parent"
                 android:id="@+id/cryptoImage"
-                android:src="@color/cardview_dark_background"
-                android:scaleType="centerCrop"/>
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@color/cardview_dark_background" />
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/cryptoName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginRight="5dp"/>
-        <TextView
-            android:id="@+id/cryptoPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginRight="5dp"
-            />
         <TextView
             android:id="@+id/cryptoSymbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_toRightOf="@id/imageCardView"
+            android:layout_centerVertical="true"
             android:textSize="24sp"
             android:textStyle="bold" />
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/cryptoPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
