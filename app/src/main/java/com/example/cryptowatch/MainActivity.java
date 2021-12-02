@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             InputStream inputStream = urlConnection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            //Create a String with the reponse
+            //Create a String with the response
             StringBuilder builder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -57,7 +60,27 @@ public class MainActivity extends AppCompatActivity {
                 builder.append("\n");
             }
             String jsonString = builder.toString();
-            Log.d("CRYPTO-WATCH", jsonString);
+            JSONArray cryptosListArray;
+
+            LinkedList<CryptoItem> cryptoItems = new LinkedList<>();
+
+            try {
+                cryptosListArray = new JSONArray(jsonString);
+                Log.d("CRYPTO-WATCH", cryptosListArray.toString());
+                final int n = cryptosListArray.length();
+                for (int i = 0; i < n; i++) {
+                    final JSONObject cryptoItem = cryptosListArray.getJSONObject(i);
+                    cryptoItems.push(new CryptoItem(
+                            cryptoItem.getString("name"),
+                            (float) (cryptoItem.getDouble("id")),
+                            cryptoItem.getString("symbol")
+                    ));
+                    Log.d("CRYPTO-WATCH", cryptoItem.getString("id"));
+                }
+            } catch (Exception e) {
+                Log.d("CRYPTO-WATCH", "Error converting to json");
+                Log.d("CRYPTO-WATCH", e.getMessage());
+            }
             return new LinkedList<>();
         }
 
