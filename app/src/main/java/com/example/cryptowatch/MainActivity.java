@@ -1,6 +1,8 @@
 package com.example.cryptowatch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     public final String LOG_TAG = "CRYPTO-WATCH";
     private LinkedList<CryptoItem> CryptoList = new LinkedList<>();
+    private RecyclerView mRecyclerView;
+    private CryptoWatchAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
     private void handleCryptoDataResult(LinkedList<CryptoItem> result) {
         Log.d("CRYPTO-WATCH", result.get(0).name);
         this.CryptoList = result;
-
+        mRecyclerView = findViewById(R.id.recycelerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new CryptoWatchAdapter(this,result);
+        mRecyclerView.setAdapter(mAdapter);
     }
+
 }
