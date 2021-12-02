@@ -9,6 +9,7 @@ public class CryptoItem {
     public float price;
     public String symbol;
 
+
     public CryptoItem(String name, float price, String symbol) {
         this.name = name;
         this.price = price;
