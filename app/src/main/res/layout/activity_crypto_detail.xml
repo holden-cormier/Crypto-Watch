@@ -168,23 +168,23 @@
         app:layout_constraintTop_toBottomOf="@+id/LowestPriceTextView" />
 
     <TextView
-        android:id="@+id/TotalSupplyLabelTextView"
+        android:id="@+id/TotalVolumeLabelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Total Supply:"
+        android:text="Total Volume:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CirculatingSupplyLabelTextView" />
 
     <TextView
-        android:id="@+id/TotalSupplyTextView"
+        android:id="@+id/TotalVolumeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Total"
-        app:layout_constraintStart_toEndOf="@+id/TotalSupplyLabelTextView"
+        app:layout_constraintStart_toEndOf="@+id/TotalVolumeLabelTextView"
         app:layout_constraintTop_toBottomOf="@+id/CirculatingSupplyTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
