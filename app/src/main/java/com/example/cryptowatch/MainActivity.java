@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     cryptoItems.push(new CryptoItem(
                             cryptoItem.getString("name"),
                             (float) (cryptoItem.getDouble("current_price")),
-                            cryptoItem.getString("symbol")
+                            cryptoItem.getString("symbol"),
+                            cryptoItem.getString("image")
                     ));
                 }
             } catch (Exception e) {

@@ -2,9 +2,11 @@ package com.example.cryptowatch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.LinkedList;
 
 public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.WordViewHolder>{
@@ -33,6 +37,17 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
         return new WordViewHolder(mItemView,this);
     }
 
+    // To Load image from URL
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     @Override
     public void onBindViewHolder(@NonNull CryptoWatchAdapter.WordViewHolder holder, int position) {
         String mCurrentName = mCryptoList.get(position).name;
@@ -41,6 +56,7 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
         holder.mCryptoName.setText(mCurrentName);
         holder.mCryptoPrice.setText(mCurrentPrice);
         holder.mCryptoSymbol.setText(mCurrentSymbol);
+        holder.mCryptoImageView.setImageDrawable(LoadImageFromWebOperations( mCryptoList.get(position).imageURL));
     }
 
     @Override
@@ -52,12 +68,14 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
         private TextView mCryptoName;
         private TextView mCryptoPrice;
         private TextView mCryptoSymbol;
+        private ImageView mCryptoImageView;
         private CryptoWatchAdapter mAdapter;
         public WordViewHolder(View itemView, CryptoWatchAdapter adapter) {
             super(itemView);
             mCryptoName = itemView.findViewById(R.id.cryptoName);
             mCryptoPrice = itemView.findViewById(R.id.cryptoPrice);
             mCryptoSymbol = itemView.findViewById(R.id.cryptoSymbol);
+            mCryptoImageView = itemView.findViewById(R.id.cryptoImage);
 
             this.mAdapter = adapter;
 
