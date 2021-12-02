@@ -15,9 +15,10 @@ public class CryptoItem {
     public float highestPrice;
     public float lowestPrice;
     public float circulatingSupply;
-    public float totalSupply;
+    public float totalVolume;
 
-    public CryptoItem(String name, float price, String symbol, String imageURL, float percentChange, float marketCap, float highestPrice, float lowestPrice, float circulatingSupply, float totalSupply) {
+
+    public CryptoItem(String name, float price, String symbol, String imageURL, float percentChange, float marketCap, float highestPrice, float lowestPrice, float circulatingSupply, float totalVolume) {
         this.name = name;
         this.price = price;
         this.symbol = symbol;
@@ -27,6 +28,6 @@ public class CryptoItem {
         this.highestPrice = highestPrice;
         this.lowestPrice = lowestPrice;
         this.circulatingSupply = circulatingSupply;
-        this.totalSupply = totalSupply;
+        this.totalVolume = totalVolume;
     }
 }

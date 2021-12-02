@@ -12,10 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 
 public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.WordViewHolder>{
@@ -51,12 +54,12 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
     @Override
     public void onBindViewHolder(@NonNull CryptoWatchAdapter.WordViewHolder holder, int position) {
         String mCurrentName = mCryptoList.get(position).name;
-        String mCurrentPrice = Float.toString(mCryptoList.get(position).price);
+        final DecimalFormat df = new DecimalFormat("0.00");
+        String mCurrentPrice = "$" + df.format(mCryptoList.get(position).price);
         String mCurrentSymbol = mCryptoList.get(position).symbol;
-        holder.mCryptoName.setText(mCurrentName);
         holder.mCryptoPrice.setText(mCurrentPrice);
         holder.mCryptoSymbol.setText(mCurrentSymbol);
-        holder.mCryptoImageView.setImageDrawable(LoadImageFromWebOperations( mCryptoList.get(position).imageURL));
+        Picasso.get().load(mCryptoList.get(position).imageURL).into( holder.mCryptoImageView);
     }
 
     @Override
@@ -72,7 +75,6 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
         private CryptoWatchAdapter mAdapter;
         public WordViewHolder(View itemView, CryptoWatchAdapter adapter) {
             super(itemView);
-            mCryptoName = itemView.findViewById(R.id.cryptoName);
             mCryptoPrice = itemView.findViewById(R.id.cryptoPrice);
             mCryptoSymbol = itemView.findViewById(R.id.cryptoSymbol);
             mCryptoImageView = itemView.findViewById(R.id.cryptoImage);

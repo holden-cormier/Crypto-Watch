@@ -89,8 +89,7 @@ public class MainActivity extends AppCompatActivity {
                             (float) (cryptoItem.getDouble("ath")),
                             (float) (cryptoItem.getDouble("atl")),
                             (float) (cryptoItem.getDouble("circulating_supply")),
-                            (float) (cryptoItem.getDouble("max_supply"))
-
+                            (float) (cryptoItem.getDouble("total_volume"))
                     ));
                 }
             } catch (Exception e) {
