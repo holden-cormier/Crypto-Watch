@@ -107,5 +107,6 @@ public class MainActivity extends AppCompatActivity {
     private void handleCryptoDataResult(LinkedList<CryptoItem> result) {
         Log.d("CRYPTO-WATCH", result.get(0).name);
         this.CryptoList = result;
+
     }
 }
