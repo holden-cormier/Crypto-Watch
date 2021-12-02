@@ -83,7 +83,14 @@ public class MainActivity extends AppCompatActivity {
                             cryptoItem.getString("name"),
                             (float) (cryptoItem.getDouble("current_price")),
                             cryptoItem.getString("symbol"),
-                            cryptoItem.getString("image")
+                            cryptoItem.getString("image"),
+                            (float) (cryptoItem.getDouble("price_change_percentage_24h")),
+                            (float) (cryptoItem.getDouble("market_cap")),
+                            (float) (cryptoItem.getDouble("ath")),
+                            (float) (cryptoItem.getDouble("atl")),
+                            (float) (cryptoItem.getDouble("circulating_supply")),
+                            (float) (cryptoItem.getDouble("max_supply"))
+
                     ));
                 }
             } catch (Exception e) {
