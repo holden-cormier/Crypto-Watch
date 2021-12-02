@@ -19,6 +19,8 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
 
     public final String LOG_TAG = "CRYPTO-WATCH";
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         FetchCryptoData fetchCryptoData = new FetchCryptoData(this);
         fetchCryptoData.execute();
     }
+    private LinkedList<CryptoItem> CryptoList = new LinkedList<>();
+
+
 
     private class FetchCryptoData extends AsyncTask<Void, Void, CryptoItem> {
         Context context;
