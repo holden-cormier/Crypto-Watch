@@ -24,6 +24,7 @@ import java.util.LinkedList;
 public class MainActivity extends AppCompatActivity {
 
     public final String LOG_TAG = "CRYPTO-WATCH";
+    private LinkedList<CryptoItem> CryptoList = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +33,17 @@ public class MainActivity extends AppCompatActivity {
         FetchCryptoData fetchCryptoData = new FetchCryptoData(this);
         fetchCryptoData.execute();
     }
-    private LinkedList<CryptoItem> CryptoList = new LinkedList<>();
 
 
 
-    private class FetchCryptoData extends AsyncTask<Void, Void, CryptoItem> {
+    private class FetchCryptoData extends AsyncTask<Void, Void, LinkedList<CryptoItem>> {
         Context context;
 
         public FetchCryptoData(Context context) {
             this.context = context;
         }
 
-        private List<CryptoItem> getCryptoList() throws IOException {
+        private LinkedList<CryptoItem> getCryptoList() throws IOException {
             //Google Books API URL
             String apiURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
@@ -77,36 +77,35 @@ public class MainActivity extends AppCompatActivity {
                     final JSONObject cryptoItem = cryptosListArray.getJSONObject(i);
                     cryptoItems.push(new CryptoItem(
                             cryptoItem.getString("name"),
-                            (float) (cryptoItem.getDouble("id")),
+                            (float) (cryptoItem.getDouble("current_price")),
                             cryptoItem.getString("symbol")
                     ));
-                    Log.d("CRYPTO-WATCH", cryptoItem.getString("id"));
                 }
             } catch (Exception e) {
                 Log.d("CRYPTO-WATCH", "Error converting to json");
                 Log.d("CRYPTO-WATCH", e.getMessage());
             }
-            return new LinkedList<>();
+            return cryptoItems;
         }
 
-        protected CryptoItem doInBackground(Void... unused) {
-            CryptoItem result;
+        protected LinkedList<CryptoItem> doInBackground(Void... unused) {
+            LinkedList<CryptoItem> result = new LinkedList<>();
             try {
-                getCryptoList();
+                result = getCryptoList();
             } catch (IOException e) {
                 Log.d("CRYPTO-WATCH", e.toString());
             }
-            result = new CryptoItem("Ethereum", 4500f, "eth");
             return result;
         }
 
-        protected void onPostExecute(CryptoItem result) {
+        protected void onPostExecute(LinkedList<CryptoItem> result) {
             // Do something with the result.
             handleCryptoDataResult(result);
         }
     }
 
-    private void handleCryptoDataResult(CryptoItem result) {
-        Log.d("CRYPTO-WATCH", result.name);
+    private void handleCryptoDataResult(LinkedList<CryptoItem> result) {
+        Log.d("CRYPTO-WATCH", result.get(0).name);
+        this.CryptoList = result;
     }
 }
