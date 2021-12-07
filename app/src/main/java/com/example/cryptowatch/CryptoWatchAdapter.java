@@ -41,16 +41,6 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
         return new WordViewHolder(mItemView,this);
     }
 
-    // To Load image from URL
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     @Override
     public void onBindViewHolder(@NonNull CryptoWatchAdapter.WordViewHolder holder, int position) {
