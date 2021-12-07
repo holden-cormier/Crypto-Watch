@@ -2,10 +2,11 @@ package com.example.cryptowatch;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 // Class to store a crypto item's data
-public class CryptoItem {
+public class CryptoItem implements Serializable {
     public String name;
     public float price;
     public String symbol;

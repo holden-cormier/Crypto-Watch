@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 cryptosListArray = new JSONArray(jsonString);
-                Log.d("CRYPTO-WATCH", cryptosListArray.toString());
                 final int n = cryptosListArray.length();
                 for (int i = 0; i < n; i++) {
                     final JSONObject cryptoItem = cryptosListArray.getJSONObject(i);
@@ -116,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleCryptoDataResult(LinkedList<CryptoItem> result) {
-        Log.d("CRYPTO-WATCH", result.get(0).name);
         this.CryptoList = result;
         mRecyclerView = findViewById(R.id.recycelerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

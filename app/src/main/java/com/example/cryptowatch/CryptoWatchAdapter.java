@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -60,6 +61,18 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
         holder.mCryptoPrice.setText(mCurrentPrice);
         holder.mCryptoSymbol.setText(mCurrentSymbol);
         Picasso.get().load(mCryptoList.get(position).imageURL).into( holder.mCryptoImageView);
+
+        CryptoItem cryptoItem = mCryptoList.get(position);
+        Intent i = new Intent(context, CryptoWatchDetailActivity.class);
+        i.putExtra("CryptoItem", cryptoItem);
+
+        holder.mCryptoCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -72,15 +85,18 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
         private TextView mCryptoPrice;
         private TextView mCryptoSymbol;
         private ImageView mCryptoImageView;
+        private CardView mCryptoCardView;
         private CryptoWatchAdapter mAdapter;
+
+
         public WordViewHolder(View itemView, CryptoWatchAdapter adapter) {
             super(itemView);
             mCryptoPrice = itemView.findViewById(R.id.cryptoPrice);
             mCryptoSymbol = itemView.findViewById(R.id.cryptoSymbol);
             mCryptoImageView = itemView.findViewById(R.id.cryptoImage);
+            mCryptoCardView = itemView.findViewById(R.id.cryptoItemCardView);
 
             this.mAdapter = adapter;
-
 
             itemView.setOnClickListener(this);
         }
