@@ -22,6 +22,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 
+// Handles the recylcer view on MainActivity
 public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.WordViewHolder>{
     private LayoutInflater mInflator;
     private LinkedList<CryptoItem> mCryptoList;
@@ -36,12 +37,16 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
     @NonNull
     @Override
     public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //WHERE YOU PLACE DATA
         View mItemView = mInflator.inflate(R.layout.crypto_item,parent,false);
         return new WordViewHolder(mItemView,this);
     }
 
 
+    /**
+     * Handles updating each UI item with data from the linkedlist containing crypto items
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull CryptoWatchAdapter.WordViewHolder holder, int position) {
         String mCurrentName = mCryptoList.get(position).name;
@@ -69,8 +74,10 @@ public class CryptoWatchAdapter extends RecyclerView.Adapter<CryptoWatchAdapter.
     public int getItemCount() {
         return mCryptoList.size();
     }
+
+
+    // Reference to the crypto item
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        //instantiate any views used in the item layout here
         private TextView mCryptoName;
         private TextView mCryptoPrice;
         private TextView mCryptoSymbol;

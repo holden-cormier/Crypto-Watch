@@ -17,10 +17,14 @@ public class CryptoWatchDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crypto_detail);
+        // Retrieve the passed crypto item class
         cryptoItem = (CryptoItem) getIntent().getSerializableExtra("CryptoItem");
         displayParameters();
     }
 
+    /**
+     * Based on the data stored in cryptoItem, updates the UI fields
+     */
     private void displayParameters() {
         TextView cryptoName = findViewById(R.id.CryptoNameTextView);
         TextView symbolTextView = findViewById(R.id.SymbolTextView);

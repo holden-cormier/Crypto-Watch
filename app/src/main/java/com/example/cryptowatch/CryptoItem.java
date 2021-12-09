@@ -5,7 +5,12 @@ import android.media.Image;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-// Class to store a crypto item's data
+
+/**
+ *  Class to encapsulate a crypto item's data
+ *  Allows for easy data storage and display
+ *  in the recycler view
+ */
 public class CryptoItem implements Serializable {
     public String name;
     public float price;

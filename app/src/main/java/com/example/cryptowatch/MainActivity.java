@@ -34,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Call the fetch data class
         FetchCryptoData fetchCryptoData = new FetchCryptoData(this);
         fetchCryptoData.execute();
     }
 
 
-
+    // Class for fetching crypto data asynchronously
     private class FetchCryptoData extends AsyncTask<Void, Void, LinkedList<CryptoItem>> {
         Context context;
 
@@ -48,31 +49,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private LinkedList<CryptoItem> getCryptoList() throws IOException {
-            //Google Books API URL
+            // URL to CoinGecko
             String apiURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
-            //Make connection to API
+            // Connect to the URL
             URL requestURL = new URL(apiURL);
             HttpURLConnection urlConnection = (HttpURLConnection) requestURL.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            //Receive the response
+            // Parse response
             InputStream inputStream = urlConnection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            //Create a String with the response
+            // Convert response to string
             StringBuilder builder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
                 builder.append("\n");
             }
+
             String jsonString = builder.toString();
+
+            // Now convert string to JSON so that we may parse it into an array
             JSONArray cryptosListArray;
-
             LinkedList<CryptoItem> cryptoItems = new LinkedList<>();
-
             try {
                 cryptosListArray = new JSONArray(jsonString);
                 final int n = cryptosListArray.length();
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
             return cryptoItems;
         }
 
+        // To handle it asynchronously, prevent the main thread from being blocked
         protected LinkedList<CryptoItem> doInBackground(Void... unused) {
             LinkedList<CryptoItem> result = new LinkedList<>();
             try {
@@ -108,14 +111,17 @@ public class MainActivity extends AppCompatActivity {
             return result;
         }
 
+        // Call the function to process the data by setting the UI
         protected void onPostExecute(LinkedList<CryptoItem> result) {
             // Do something with the result.
             handleCryptoDataResult(result);
         }
     }
 
+    // This takes in the crypto data from the API and updates the UI
     private void handleCryptoDataResult(LinkedList<CryptoItem> result) {
         this.CryptoList = result;
+        // Initialize the recycler view and the adapter with the data
         mRecyclerView = findViewById(R.id.recycelerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new CryptoWatchAdapter(this,result);
