@@ -10,4 +10,13 @@ Our final project is called CryptoWatch and it is an app where users can view a 
 ## Documentation:
 
 `MainActivity.java`
-This contains the main recycler view logic as well as the `FetchCryptoData` class that handles collecting the crypto data from CoinGecko and parsing it into a readable format for the program
+This contains the main recycler view logic that lists the fetched cryptocurrencies as well as the `FetchCryptoData` class that handles collecting the crypto data from CoinGecko and parsing it into a readable format for the program
+
+`CryptoWatchAdapter.java`
+The adapter in charge of populating each list item in the recylcer view and handling the onclick to redirect to the crypto detail activity
+
+`CryptoItem.java`
+Encapsualtes data for a cryptocurrency coin
+
+`CryptoWatchDetailActivity.java`
+Displays a detailed view of the crypto with more stats
