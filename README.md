@@ -6,3 +6,8 @@ Our final project is called CryptoWatch and it is an app where users can view a 
 ## Technologies used:
 - AndroidSDK
 - CoinGecko HTTP API
+
+## Documentation:
+
+`MainActivity.java`
+This contains the main recycler view logic as well as the `FetchCryptoData` class that handles collecting the crypto data from CoinGecko and parsing it into a readable format for the program
